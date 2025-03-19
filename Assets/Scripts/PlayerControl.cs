@@ -13,12 +13,18 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D rigidBody;
     private GrowndSensor _growndSensor; // _ delante significa que es privada :33
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
+    private AudioSource _audioSource;
+    public AudioClip jumpSFX;
 
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         _growndSensor = GetComponentInChildren<GrowndSensor>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+    
     }
 
     string numeros = ":33";
@@ -37,9 +43,21 @@ public class PlayerControl : MonoBehaviour
         if(Input.GetButtonDown("Jump") && _growndSensor.isGrounded == true)
         {
             Jump(); //Llama la funcion de salto
+           
         }
 
         Movement(); //Llama la funcion que acabamos de crear para el movimiento
+        
+        _animator.SetBool("IsJumping", !_growndSensor.isGrounded);
+
+        /*if(_growndSensor.isGrounded)
+        {
+            _animator.SetBool("IsJumping", true);            
+        }
+        else
+        {            
+            _animator.SetBool("IsJumping", false);
+        }*/
 
         //transform.position = new Vector3(transform.position.x + direction * playerSpeed * Time.deltaTime, transform.position.y, transform.position.z);
         //transform.Translate(new Vector3(direction * playerSpeed * Time.deltaTime, 0, 0));
@@ -58,15 +76,22 @@ public class PlayerControl : MonoBehaviour
         if(imputHorizontal > 0)
          {
             _spriteRenderer.flipX = false;
+            _animator.SetBool("IsRunning", true);   //modifica el IsEunning que es el condicionante de que se active la animacion de correr
         }
         else if(imputHorizontal < 0)
         {
             _spriteRenderer.flipX = true;
+            _animator.SetBool("IsRunning", true);
+        }
+        else        //else se ejecuta si ninguna de las de funciones del if o el esle if se cumple
+        {
+            _animator.SetBool("IsRunning", false);
         }
     }
 
     void Jump()
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        _audioSource.PlayOneShot(jumpSFX); //play one shot hace que se tire el sonido aunque algo se reproduzca tipo generalmente para ataques, disparos o daños
     }
 }

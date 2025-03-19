@@ -12,9 +12,11 @@ public class CameraMovement : MonoBehaviour
     public float interpolationRatio = 0.5f;
 
 
-    void Start()
+    void Awake()
     {
-        
+        //Busca un obeto por el nombre de la escena y el .getcomponent de despues busca el transform dentro de ese objeto
+        //playerTransform = GameObject.Find("Player").GetComponent<Transform>(); ^^^^^^^^^^
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>(); //Busca el objeto por el tag que tenga
     }
 
     void FixedUpdate()
