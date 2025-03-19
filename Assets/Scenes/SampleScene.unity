@@ -20743,6 +20743,7 @@ MonoBehaviour:
   direction: 0
   playerSpeed: 4.5
   jumpForce: 12
+  jumpSFX: {fileID: 8300000, guid: bd08923515cae004691633541be7fcb0, type: 3}
 --- !u!61 &787543758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24156,7 +24157,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3073b1382c24cd14592fa14accc07b0c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
