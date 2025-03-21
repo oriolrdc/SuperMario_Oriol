@@ -6,9 +6,11 @@ public class MisteryBox : MonoBehaviour
 {
     //Animaciones
     private Animator _animator;
+    private bool _isOpen = false;
     //Audio
     private AudioSource _audioSource;
-    public AudioClip _MisteryBoxSFX;
+    public AudioClip misteryBoxSFX;
+    public AudioClip misteryBoxSFXOpened;
 
     void Awake()
     {
@@ -18,9 +20,18 @@ public class MisteryBox : MonoBehaviour
 
     void ActivateBox()
     {
-        _audioSource.clip = _MisteryBoxSFX;
-        _animator.SetTrigger("OpenBox");
-        _audioSource.Play();
+        if(!_isOpen)
+        {
+            
+           _audioSource.clip = misteryBoxSFX;
+            _animator.SetTrigger("OpenBox"); 
+            _isOpen = true;
+        }
+        else
+        {
+            _audioSource.clip = misteryBoxSFXOpened;
+        }
+        _audioSource.Play();        
     } 
 
     void OnTriggerEnter2D(Collider2D collider)
