@@ -23,17 +23,6 @@ public class Enemy : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
-    
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 
     void FixedUpdate()
     {
@@ -43,7 +32,7 @@ public class Enemy : MonoBehaviour
     public void Death()
     {
         direction = 0;
-        _rigidBody.GravityScale = 0;
+        _rigidBody.gravityScale = 0;
         _animator.SetTrigger("IsDead");
         boxCollider.enabled = false;
         Destroy(gameObject, 0.3f);
