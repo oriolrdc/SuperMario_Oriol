@@ -10,21 +10,27 @@ public class PlayerControl : MonoBehaviour
     private float imputHorizontal;
     public float playerSpeed = 4.5f;
     public float jumpForce = 10;
-    private Rigidbody2D rigidBody;
+    private Rigidbody2D _rigidBody;
     private GrowndSensor _growndSensor; // _ delante significa que es privada :33
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private AudioSource _audioSource;
     public AudioClip jumpSFX;
+    public AudioClip deathSFX;
+    private BoxCollider2D _boxCollider;
+    private GameManager _gameManager;
+    private SoundManager _soundManager;
 
     void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         _growndSensor = GetComponentInChildren<GrowndSensor>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-    
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
     }
 
     string numeros = ":33";
@@ -38,6 +44,11 @@ public class PlayerControl : MonoBehaviour
     
     void Update() // Update is called once per frame
     {
+        if(!_gameManager.isPlaying)
+        {
+            return;
+        }
+
         imputHorizontal = Input.GetAxisRaw("Horizontal");
 
         if(Input.GetButtonDown("Jump") && _growndSensor.isGrounded == true)
@@ -66,9 +77,9 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate() // se llama automaticamente todo el rato las veces por segundo que tenga unity
     {
-        rigidBody.velocity = new Vector2(imputHorizontal * playerSpeed, rigidBody.velocity.y);
-        //rigidBody.AddForce(new Vector2(imputHorizontal, 0));
-        //rigidBody.MovePosition(new Vector2(100, 0));
+        _rigidBody.velocity = new Vector2(imputHorizontal * playerSpeed, _rigidBody.velocity.y);
+        //_rigidBody.AddForce(new Vector2(imputHorizontal, 0));
+        //_rigidBody.MovePosition(new Vector2(100, 0));
     }
 
     void Movement() //Funcion creada para poner todo lo relacionado con el movimiento (no se llama automaticamente)
@@ -91,7 +102,23 @@ public class PlayerControl : MonoBehaviour
 
     void Jump()
     {
-        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _audioSource.PlayOneShot(jumpSFX); //play one shot hace que se tire el sonido aunque algo se reproduzca tipo generalmente para ataques, disparos o daños
+    }
+
+    public void Death()
+    {
+        _animator.SetTrigger("IsDead");
+        _audioSource.PlayOneShot(deathSFX);
+        _boxCollider.enabled = false;
+        _rigidBody.gravityScale = 0;
+        Destroy(_growndSensor.gameObject);
+        imputHorizontal = 0;
+        _rigidBody.velocity = Vector2.zero;
+        
+        //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
+        //_soundManager.DeathBGM();
+
+        _gameManager.isPlaying = false;
     }
 }

@@ -42,7 +42,10 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>(); //variable que accede al playercontrol(script para ejecturar la funcion death que esta alli)
+            playerScript.Death();
+
         }
 
         direction *= -1;
