@@ -30,10 +30,10 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_gameManager.isPlaying && !_timerFinished)
+        /*if(!_gameManager.isPlaying && !_timerFinished)
         {
             DeathBGM();
-        }
+        }*/
         
     }
 
@@ -44,7 +44,19 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    public void DeathBGM()
+    public void PauseBGM()
+    {
+        if(_gameManager.isPaused)
+        {
+            _audioSource.Pause();
+        }
+        else
+        {
+            _audioSource.Play();
+        }
+    }
+
+    /*public void DeathBGM()
     {
         _audioSource.Stop();
         
@@ -55,5 +67,14 @@ public class SoundManager : MonoBehaviour
             _timerFinished = true;
             _audioSource.PlayOneShot(gameOver);
         }
+    }*/
+
+    public IEnumerator DeathBGM()
+    {
+        _audioSource.Stop();
+
+        yield return new WaitForSeconds(delay);
+
+        _audioSource.PlayOneShot(gameOver);
     }
 }

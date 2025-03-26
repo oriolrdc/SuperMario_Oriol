@@ -47,7 +47,13 @@ public class PlayerControl : MonoBehaviour
         if(!_gameManager.isPlaying)
         {
             return;
+
+            
         }
+        if(_gameManager.isPaused)
+            {
+                return;
+            }
 
         imputHorizontal = Input.GetAxisRaw("Horizontal");
 
@@ -111,14 +117,18 @@ public class PlayerControl : MonoBehaviour
         _animator.SetTrigger("IsDead");
         _audioSource.PlayOneShot(deathSFX);
         _boxCollider.enabled = false;
-        _rigidBody.gravityScale = 0;
         Destroy(_growndSensor.gameObject);
         imputHorizontal = 0;
         _rigidBody.velocity = Vector2.zero;
-        
+        _rigidBody.AddForce(Vector2.up * jumpForce / 1.5f, ForceMode2D.Impulse);
+
+        StartCoroutine(_soundManager.DeathBGM());//opcion 2: _soundManager.StartCoroutine("DeathBGM"); 
+
         //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
         //_soundManager.DeathBGM();
 
         _gameManager.isPlaying = false;
+
+        Destroy(gameObject, 2);
     }
 }

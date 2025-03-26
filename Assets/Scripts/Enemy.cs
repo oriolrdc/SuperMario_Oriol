@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     //Movimiento
     public int direction = 1;
-    public float enemySpeed = 5;
+    public float enemySpeed = 2;
     private Rigidbody2D _rigidBody;
     public BoxCollider2D boxCollider;
     //Animacion
@@ -22,6 +22,11 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    void Start()
+    {
+        enemySpeed = 0;
     }
 
     void FixedUpdate()
@@ -48,6 +53,19 @@ public class Enemy : MonoBehaviour
 
         }
 
-        direction *= -1;
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6)
+        {
+            direction *= -1;
+        }
+    }
+
+    void OnBecameVisible()
+    {
+        enemySpeed = 2;
+    }
+
+    void OnBecameInvisible()
+    {
+        enemySpeed = 0;
     }
 }
