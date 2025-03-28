@@ -6,9 +6,9 @@ public class Mushroom : MonoBehaviour
 {
     //movimiento
     private Rigidbody2D _rigidBody;
+    public BoxCollider2D boxCollider;
     public int direction = 1;
     public float mushroomSpeed = 2;
-    public BoxCollider2D boxCollider;
     //audio
     private AudioSource _audioSource;
     public AudioClip deathMushroomSFX;
@@ -39,17 +39,19 @@ public class Mushroom : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
+            PlayerControl playerScript = collision.gameObject.GetComponent<PlayerControl>();
+            playerScript.canShoot = true;
             StartCoroutine(MushroomTaken());
         }
     }
 
     public IEnumerator MushroomTaken()
     {
-        _audioSource.PlayOneShot(deathMushroomSFX);
-        _spriteRenderer.enabled = false;
         direction = 0;
-        boxCollider.enabled = false;
         _rigidBody.gravityScale = 0;
+        boxCollider.enabled = false;
+        _spriteRenderer.enabled = false;
+        _audioSource.PlayOneShot(deathMushroomSFX);
 
         yield return new WaitForSeconds(delay);
 
