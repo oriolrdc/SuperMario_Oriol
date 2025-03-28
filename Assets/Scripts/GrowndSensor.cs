@@ -6,8 +6,13 @@ public class GrowndSensor : MonoBehaviour
 {
 
     public bool isGrounded;
-
     private Enemy _enemyScript;
+    public Rigidbody2D rigidBody;
+
+    void Awake()
+    {
+        rigidBody = GetComponentInParent<Rigidbody2D>();
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -18,10 +23,10 @@ public class GrowndSensor : MonoBehaviour
         }
         else if(collider.gameObject.layer == 6)
         {
+            rigidBody.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
             _enemyScript = collider.gameObject.GetComponent<Enemy>();
             _enemyScript.Death();
         }
-        
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -30,7 +35,6 @@ public class GrowndSensor : MonoBehaviour
         {
             isGrounded = true;
         }
-        
     }
 
     void OnTriggerExit2D(Collider2D collider)
@@ -39,7 +43,5 @@ public class GrowndSensor : MonoBehaviour
         {
             isGrounded = false;
         }
-        
     }
-
 }
