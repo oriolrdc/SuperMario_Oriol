@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rigidBody;
     public float bulletSpeed = 10;
     
+    
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -14,7 +15,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        _rigidBody.AddForce(Vector2.right * bulletSpeed, ForceMode2D.Impulse);
+        _rigidBody.AddForce(transform.right * bulletSpeed, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

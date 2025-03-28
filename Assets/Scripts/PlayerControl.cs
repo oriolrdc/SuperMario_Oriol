@@ -20,6 +20,10 @@ public class PlayerControl : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private GameManager _gameManager;
     private SoundManager _soundManager;
+    //disparo
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+    public AudioClip shootSFX;
 
     void Awake()
     {
@@ -63,6 +67,11 @@ public class PlayerControl : MonoBehaviour
            
         }
 
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+
         Movement(); //Llama la funcion que acabamos de crear para el movimiento
         
         _animator.SetBool("IsJumping", !_growndSensor.isGrounded);
@@ -92,12 +101,12 @@ public class PlayerControl : MonoBehaviour
     {
         if(imputHorizontal > 0)
          {
-            _spriteRenderer.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             _animator.SetBool("IsRunning", true);   //modifica el IsEunning que es el condicionante de que se active la animacion de correr
         }
         else if(imputHorizontal < 0)
         {
-            _spriteRenderer.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             _animator.SetBool("IsRunning", true);
         }
         else        //else se ejecuta si ninguna de las de funciones del if o el esle if se cumple
@@ -111,6 +120,7 @@ public class PlayerControl : MonoBehaviour
         _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _audioSource.PlayOneShot(jumpSFX); //play one shot hace que se tire el sonido aunque algo se reproduzca tipo generalmente para ataques, disparos o daños
     }
+
 
     public void Death()
     {
@@ -130,5 +140,11 @@ public class PlayerControl : MonoBehaviour
         _gameManager.isPlaying = false;
 
         Destroy(gameObject, 2);
+    }
+
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        _audioSource.PlayOneShot(shootSFX);
     }
 }

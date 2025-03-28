@@ -14,7 +14,7 @@ public class GrowndSensor : MonoBehaviour
         if(collider.gameObject.layer == 3)
         {
             isGrounded = true;
-            Debug.Log(collider.gameObject.name);
+            //Debug.Log(collider.gameObject.name); --> esto hace que se vea en la consola todo bloque que pisa
         }
         else if(collider.gameObject.layer == 6)
         {
