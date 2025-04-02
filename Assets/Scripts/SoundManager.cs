@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
-
 {
     private AudioSource _audioSource;
     public AudioClip bgm;
@@ -76,5 +75,10 @@ public class SoundManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         _audioSource.PlayOneShot(gameOver);
+    }
+
+    public void Win()
+    {
+        _audioSource.Pause();
     }
 }

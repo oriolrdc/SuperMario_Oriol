@@ -59,6 +59,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Tuberia") || collider.gameObject.layer == 6)
+        {
+            direction *= -1;
+        }
+    }
+
     void OnBecameVisible()
     {
         enemySpeed = 2;
