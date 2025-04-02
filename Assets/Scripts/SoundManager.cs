@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
     private GameManager _gameManager;
 
     //Cronometro
-    public float delay = 5;
+    public float delay = 6;
     public float timer;
     private bool _timerFinished = false;
 
