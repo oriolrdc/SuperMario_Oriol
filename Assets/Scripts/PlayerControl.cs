@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 
@@ -29,6 +30,7 @@ public class PlayerControl : MonoBehaviour
     //timerpowerup
     public float powerUpDuration = 10;
     public float powerUpTimer;
+    public Image powerUpImage;
 
 
     void Awake()
@@ -162,6 +164,8 @@ public class PlayerControl : MonoBehaviour
     void PowerUpTimer()
     {
         powerUpTimer += Time.deltaTime;
+
+        powerUpImage.fillAmount = Mathf.InverseLerp(powerUpDuration, 0, powerUpTimer);
 
         if(powerUpTimer >= powerUpDuration)
         {

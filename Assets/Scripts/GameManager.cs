@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseCanvas;
     private int _coins = 0;
     public Text coinsText;
+    private int _Kills = 0;
+    public Text KillsText;
 
 
     void Awake()
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         coinsText.text = "Coins: " + _coins.ToString();
+        KillsText.text = "Kills: " + _Kills.ToString();
     }
 
     void Update()
@@ -62,6 +65,12 @@ public class GameManager : MonoBehaviour
     {
         _coins++;
         coinsText.text = "Coins: " + _coins.ToString();
+    }
+
+    public void Kills()
+    {
+        _Kills++;
+        KillsText.text = "Kills: " + _Kills.ToString();
     }
 
 }

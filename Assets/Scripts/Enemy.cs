@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,7 +15,15 @@ public class Enemy : MonoBehaviour
     private AudioSource _audioSource;
     //Audio
     public AudioClip audioClip;
-    
+    public AudioClip hitSFX;
+    public AudioClip goombaDeathSFX;
+    //vida
+    private float currentHealth;
+    public float maxHealth = 5;
+    private Slider _healthBar;
+    //killscounter
+    private GameManager _gameManager;
+
 
     void Awake()
     {
@@ -22,11 +31,15 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        _healthBar = GetComponentInChildren<Slider>();
+        _gameManager =  GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Start()
     {
         enemySpeed = 0;
+        currentHealth = maxHealth;
+        _healthBar.maxValue = maxHealth;
     }
 
     void FixedUpdate()
@@ -36,11 +49,27 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
+        _gameManager.Kills();
+        _audioSource.PlayOneShot(goombaDeathSFX);
         direction = 0;
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("IsDead");
         boxCollider.enabled = false;
         Destroy(gameObject, 0.3f);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _audioSource.PlayOneShot(hitSFX);
+
+        currentHealth-= damage;
+
+        _healthBar.value = currentHealth;
+
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
