@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     //Cronometro
     public float delay = 6;
     public float timer;
-    private bool _timerFinished = false;
+    //private bool _timerFinished = false;
 
     void Awake()
     {
