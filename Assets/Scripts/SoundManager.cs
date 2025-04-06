@@ -14,10 +14,14 @@ public class SoundManager : MonoBehaviour
     public float timer;
     //private bool _timerFinished = false;
 
+    //Transicion
+    private Animator _bowserAnimator;
+
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        _bowserAnimator = GameObject.Find("BowserTransition").GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -70,10 +74,12 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator DeathBGM()
     {
+        Debug.Log("pepe");
         _audioSource.Stop();
 
         yield return new WaitForSeconds(delay);
-
+        Debug.Log("hola");
+        _bowserAnimator.SetTrigger("BowserYes");
         _audioSource.PlayOneShot(gameOver);
     }
 

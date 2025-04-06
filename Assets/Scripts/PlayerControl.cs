@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour
     public float powerUpTimer;
     public Image powerUpImage;
 
+    
+
 
     void Awake()
     {
@@ -146,7 +148,7 @@ public class PlayerControl : MonoBehaviour
         _rigidBody.AddForce(Vector2.up * jumpForce / 1.5f, ForceMode2D.Impulse);
 
         StartCoroutine(_soundManager.DeathBGM());//opcion 2: _soundManager.StartCoroutine("DeathBGM"); 
-
+        Debug.Log("puta");
         //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
         //_soundManager.DeathBGM();
 
