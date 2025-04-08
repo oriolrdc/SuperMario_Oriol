@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     //Animacion
     private Animator _animator;
     private AudioSource _audioSource;
+    private SpriteRenderer _spriteRenderer;
     //Audio
     public AudioClip audioClip;
     public AudioClip hitSFX;
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -55,7 +57,8 @@ public class Enemy : MonoBehaviour
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("IsDead");
         boxCollider.enabled = false;
-        Destroy(gameObject, 0.3f);
+        _spriteRenderer.enabled = false;
+        Destroy(gameObject, 2f);
     }
 
     public void TakeDamage(float damage)

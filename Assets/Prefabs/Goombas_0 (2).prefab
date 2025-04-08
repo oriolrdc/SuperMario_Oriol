@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6500539363767402959}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2619462, y: -1.752908, z: -0.8834515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   enemySpeed: 2
   boxCollider: {fileID: 0}
   audioClip: {fileID: 8300000, guid: a13ed6e2294c1ed488d2e932143f9bc4, type: 3}
+  hitSFX: {fileID: 8300000, guid: ee6880d77b465cd4f9b0a911ea6394ed, type: 3}
+  goombaDeathSFX: {fileID: 8300000, guid: de0de1424ee08d04b87705c6f54fe650, type: 3}
   maxHealth: 5
 --- !u!212 &5803890524784526397
 SpriteRenderer:

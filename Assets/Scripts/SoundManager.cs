@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
     private AudioSource _audioSource;
     public AudioClip bgm;
     public AudioClip gameOver;
+    public AudioClip bowserRisa;
     private GameManager _gameManager;
 
     //Cronometro
     public float delay = 6;
+    public float delay1 = 3;
     public float timer;
     //private bool _timerFinished = false;
 
@@ -74,13 +77,15 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator DeathBGM()
     {
-        Debug.Log("pepe");
         _audioSource.Stop();
 
         yield return new WaitForSeconds(delay);
-        Debug.Log("hola");
         _bowserAnimator.SetTrigger("BowserYes");
         _audioSource.PlayOneShot(gameOver);
+        _audioSource.PlayOneShot(bowserRisa);
+        yield return new WaitForSeconds(delay1);
+        SceneManager.LoadScene(2);
+
     }
 
     public void Win()

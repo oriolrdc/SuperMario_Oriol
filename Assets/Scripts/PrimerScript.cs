@@ -13,7 +13,7 @@ public class PrimerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Calculos();
+        //Calculos();
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class PrimerScript : MonoBehaviour
 
     }
 
-    void Calculos()
+    /*void Calculos()
     {
         Debug.Log(numerosEnteros);
         
@@ -37,5 +37,5 @@ public class PrimerScript : MonoBehaviour
 
         numerosEnteros += 2;
         Debug.Log(numerosEnteros);
-    }
+    }*/
 }
