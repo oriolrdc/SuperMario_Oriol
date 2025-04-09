@@ -17,11 +17,6 @@ public class GrowndSensor : MonoBehaviour
         _playerScript = GetComponentInParent<PlayerControl>();
     }
 
-    void Update()
-    {
-        DeathByVoid();
-    }
-
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.layer == 3)
@@ -58,9 +53,5 @@ public class GrowndSensor : MonoBehaviour
         }
     }
 
-    void DeathByVoid()
-    {
-        
-        
-    }
+
 }

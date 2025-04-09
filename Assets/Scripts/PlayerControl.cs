@@ -150,7 +150,6 @@ public class PlayerControl : MonoBehaviour
         StartCoroutine(_soundManager.DeathBGM());//opcion 2: _soundManager.StartCoroutine("DeathBGM"); 
         //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
         //_soundManager.DeathBGM();
-
         _gameManager.isPlaying = false;
 
         Destroy(gameObject, 10);
