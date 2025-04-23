@@ -33,15 +33,23 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
-        _enemyIndex = Random.Range(0, _enemiesPrefab.Length); //esto pilla un int random entre 0 y 1 pq el 2 por alguna razon lo excluyen (debe ser peruano ns) con _enemylength se aregla
-        foreach(Transform spawn in _spawnPoint)
+        for (int i = 0; i < _enemiesToSpawn; i++)
         {
-            Instantiate(_enemiesPrefab[_enemyIndex], spawn.position, spawn.rotation);
+            foreach(Transform spawn in _spawnPoint)
+            {
+                _enemyIndex = Random.Range(0, _enemiesPrefab.Length);
+                Instantiate(_enemiesPrefab[_enemyIndex], spawn.position, spawn.rotation);
+
+                yield return new WaitForSeconds(1);
+            }
+
+            yield return new WaitForSeconds(1);
         }
+        //esto pilla un int random entre 0 y 1 pq el 2 por alguna razon lo excluyen (debe ser peruano ns) con _enemylength se aregla
+        
         //Instantiate(_enemiesPrefab[_enemyIndex], _spawnPoint.position, _spawnPoint.rotation);
-        _enemiesToSpawn--;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -49,7 +57,8 @@ public class EnemySpawn : MonoBehaviour
         if(collider.gameObject.CompareTag("Player")); //si el if detecta que mario a tocado el trigger llama la funcion spawnenemy durante todo el rato con el invoke repeating
         {
             _collider.enabled = false;
-            InvokeRepeating("SpawnEnemy", 0, 2); //primer valor lo que tarda en ejecutarlo, segundo cada cuanto lo hace
+            StartCoroutine(SpawnEnemy());
+            //InvokeRepeating("SpawnEnemy", 0, 2); //primer valor lo que tarda en ejecutarlo, segundo cada cuanto lo hace
         }
     }
 

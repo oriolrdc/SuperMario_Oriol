@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private int _Kills = 0;
     public Text KillsText;
 
+    public List<GameObject> enemiesInScreen;
+
 
     void Awake()
     {
@@ -34,6 +36,15 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Pause"))
         {
             Pause();
+        }
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            foreach(GameObject enemy in enemiesInScreen)
+            {
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                enemyScript.Death();
+            }
         }
     }
 

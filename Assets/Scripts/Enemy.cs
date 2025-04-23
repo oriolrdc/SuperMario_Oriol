@@ -101,10 +101,12 @@ public class Enemy : MonoBehaviour
     void OnBecameVisible()
     {
         direction = 1;
+        _gameManager.enemiesInScreen.Add(gameObject);
     }
 
     void OnBecameInvisible()
     {
         direction = 0;
+        _gameManager.enemiesInScreen.Remove(gameObject);
     }
 }
