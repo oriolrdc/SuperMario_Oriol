@@ -6,9 +6,9 @@ public class PrimerScript : MonoBehaviour
 {
     // Variables = Cajitas
     public int numerosEnteros = 5; //Variable numeros enteros
-    private float numeroDecimal = 7.5f; //Variable numeros decimales
-    bool boleana = true; //Variable verdadero o falso
-    string cadenaTexto = "Hola desimaru"; //Variable que escribe
+    //private float numeroDecimal = 7.5f; //Variable numeros decimales
+    //bool boleana = true; //Variable verdadero o falso
+    //string cadenaTexto = "Hola desimaru"; //Variable que escribe
 
     private int[] numeros = {75, 1, 3}; //para diferenciar un array de una variable normal se pone los [] y nos permite guardar varias "cajitas" o elementos
 

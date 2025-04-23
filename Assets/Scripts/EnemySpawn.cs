@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
     [Tooltip("Numero de enemigos que van a spawnear")] //se ve la descripcion si en el inspector dejas el raton en la variable
     [SerializeField] private int _enemiesToSpawn; //el serialize field te deja ver variables privadas en el inspector
 
-    [Tooltip("punto de donde aparecen los enemigos")]
+    [Tooltip("punto de donde aparecen los enemigos")] 
     [SerializeField] private Transform[] _spawnPoint;
 
     private int _enemyIndex;
