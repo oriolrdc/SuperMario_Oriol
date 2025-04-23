@@ -8,7 +8,7 @@ public class GrowndSensor : MonoBehaviour
     public bool isGrounded;
     private Enemy _enemyScript;
     public Rigidbody2D rigidBody;
-    public float jumpDamage = 5;
+    public float jumpDamage = 10;
     private PlayerControl _playerScript;
 
     void Awake()

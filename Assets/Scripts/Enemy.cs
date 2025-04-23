@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        enemySpeed = 0;
         currentHealth = maxHealth;
         _healthBar.maxValue = maxHealth;
     }
@@ -101,11 +100,11 @@ public class Enemy : MonoBehaviour
 
     void OnBecameVisible()
     {
-        enemySpeed = 2;
+        direction = 1;
     }
 
     void OnBecameInvisible()
     {
-        enemySpeed = 0;
+        direction = 0;
     }
 }

@@ -13,7 +13,8 @@ public class MisteryBox : MonoBehaviour
     public AudioClip misteryBoxSFXOpened;
     //SetaAparecer
     public Transform mushroomSpawn;
-    public GameObject mushroomPrefab;
+    public GameObject[] powerUpPrefab;
+    public int powerUpIndex;
     public AudioClip mushroomApearSFX;
 
     void Awake()
@@ -49,7 +50,7 @@ public class MisteryBox : MonoBehaviour
 
     void Mushrooms()
     {
-        Instantiate(mushroomPrefab, mushroomSpawn.position, mushroomSpawn.rotation);
+        Instantiate(powerUpPrefab[powerUpIndex], mushroomSpawn.position, mushroomSpawn.rotation);
         _audioSource.PlayOneShot(mushroomApearSFX);
     }
 

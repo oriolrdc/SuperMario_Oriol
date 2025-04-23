@@ -54,7 +54,11 @@ MonoBehaviour:
   misteryBoxSFX: {fileID: 8300000, guid: a711d8bebaab2724f9aadbae27550618, type: 3}
   misteryBoxSFXOpened: {fileID: 8300000, guid: a13ed6e2294c1ed488d2e932143f9bc4, type: 3}
   mushroomSpawn: {fileID: 6300399550526026252}
-  mushroomPrefab: {fileID: 5660248167779095151, guid: c7cf4131cfb932a4f924efe4c744adf7, type: 3}
+  powerUpPrefab:
+  - {fileID: 5660248167779095151, guid: c7cf4131cfb932a4f924efe4c744adf7, type: 3}
+  - {fileID: 6500539363767402959, guid: 88c8d45e531c9ed418919432ca6aeb5b, type: 3}
+  - {fileID: 3257497615129826633, guid: 6e12edae6e3e6214eafb406a5a37c080, type: 3}
+  powerUpIndex: 0
   mushroomApearSFX: {fileID: 8300000, guid: 45370bfd017226f499f5403d05104978, type: 3}
 --- !u!212 &2207904682643451927
 SpriteRenderer:
